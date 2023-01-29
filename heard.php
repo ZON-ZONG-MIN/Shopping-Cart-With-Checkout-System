@@ -17,7 +17,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css' />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    
+
     <link rel="shortcut icon" href="img/cart.png" type="image/x-icon">
     <title>Shopping Cart</title>
 </head>
@@ -44,7 +44,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart"></i>
-          <span id="cart-item" class="badge bg-danger">1</span></a>
+          <span id="cart-item" class="badge bg-danger"></span></a>
         </li>
       <?php
         if (isset($_SESSION["userId"])) {
