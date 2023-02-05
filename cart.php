@@ -63,6 +63,20 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
+                <div style="display:<?php 
+                    if(isset($_SESSION['showAlert']))
+                        echo $_SESSION['showAlert'];
+                    else
+                        echo 'none';
+                    unset($_SESSION['showAlert']); ?>" 
+                    class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong><?php 
+                            if(isset($_SESSION['message']))
+                                echo $_SESSION['message'];
+                            unset($_SESSION['showAlert']); ?>
+                    </strong>
+                </div>
                 <div class="table-responsive mt-2">
                     <table class="table table-bordered table-striped text-center">
                        <thead>
@@ -103,9 +117,31 @@
                                 <td><?= $row['product_name'] ?></td>
                                 <td><i class="fas fa-dollar-sign">&nbsp;&nbsp;<?= number_format($row['product_price'], 2)?></i></td>
                                 <td><input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:75px;"></td>
-                                <td></td>
+                                <td><i class="fas fa-dollar-sign">&nbsp;&nbsp;<?= number_format($row['total_price'], 2)?></td>
+                                <td><a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead" 
+                                onclick="return confirm('Are you sure want to remove this item?');"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
+                            <?php $grand_total += $row['total_price']; ?>
                             <?php endwhile; ?>
+                            <tr>
+                                <td colspan="3">
+                                    <a href="index.php" class="btn btn-success">
+                                        <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Continue Shopping
+                                    </a>
+                                </td>
+                                <td colspan="2">
+                                    <b>Grand Total</b>
+                                </td>
+                                <td>
+                                    <i class="fas fa-dollar-sign">&nbsp;&nbsp;<?= number_format($grand_total, 2); ?>
+                                </td>
+                                <td>
+                                    <a href="check.php" class="btn btn-info <?= ($grand_total > 1)? "":"disabled"; ?>">
+                                        <i class="far fa-credit-card"></i>
+                                        &nbsp;&nbsp;Checkout
+                                    </a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table> 
                 </div>
