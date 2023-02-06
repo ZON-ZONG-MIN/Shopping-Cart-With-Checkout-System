@@ -34,7 +34,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Products</a>
+                <a class="nav-link" aria-current="page" href="index.php">Products</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="#">Categories</a>
@@ -48,7 +48,7 @@
                 </li>
             <?php
                 if (isset($_SESSION["userId"])) {
-                echo "<li class='nav-item'><a class='nav-link' aria-current='page' href='profile.php'>Profile page</a></li>";
+                echo "<li class='nav-item'><a class='nav-link' aria-current='page' href='profile.php'>Profile</a></li>";
                 echo "<li class='nav-item'><a class='nav-link' aria-current='page' href='includes/logout.inc.php'>Log out</a></li>";
                 } else {
                 echo "<li class='nav-item'><a class='nav-link' aria-current='page' href='signup.php'>Sign up</a></li>";
@@ -113,13 +113,22 @@
                             ?>
                             <tr>
                                 <td><?= $row['id'] ?></td>
+                                <input type="hidden" class="pid" value="<?= $row['id'] ?>">
+                                <!--Updation itemQty-->
+
                                 <td><img src="<?= $row['product_image'] ?>" width="50"></td>
                                 <td><?= $row['product_name'] ?></td>
+
                                 <td><i class="fas fa-dollar-sign">&nbsp;&nbsp;<?= number_format($row['product_price'], 2)?></i></td>
+                                <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
+                                <!--Updation itemQty-->
+
                                 <td><input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:75px;"></td>
                                 <td><i class="fas fa-dollar-sign">&nbsp;&nbsp;<?= number_format($row['total_price'], 2)?></td>
-                                <td><a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead" 
-                                onclick="return confirm('Are you sure want to remove this item?');"><i class="fas fa-trash-alt"></i></a></td>
+                                <td>
+                                    <a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead" 
+                                    onclick="return confirm('Are you sure want to remove this item?');"><i class="fas fa-trash-alt"></i></a>
+                                </td>
                             </tr>
                             <?php $grand_total += $row['total_price']; ?>
                             <?php endwhile; ?>
@@ -151,7 +160,31 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-           
+
+            // Change the item quantity
+            $(".itemQty").on('change', function(){
+                var $el = $(this).closest('tr');
+
+                var pid = $el.find(".pid").val();
+                var pprice = $el.find(".pprice").val();
+                var qty = $el.find(".itemQty").val();
+                console.log(pid + '/' + pprice + '/' + qty);
+                location.reload(true);
+                $.ajax({
+                    url: 'action.php',
+                    method: 'post',
+                    cache: false,
+                    data: {
+                        qty:qty, 
+                        pid:pid, 
+                        pprice:pprice
+                    },
+                    success: function(response){
+                        console.log(response);
+                    }
+                });
+            });
+
             // Load total no.of items added in the cart and display in the navbar
             load_cart_item_number();
 

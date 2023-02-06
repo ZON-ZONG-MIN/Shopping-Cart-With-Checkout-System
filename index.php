@@ -25,6 +25,14 @@
           </div>
           <div class="card-footer p-1 d-grid gap-2">
             <form action="" class="form-submit"> <!--line:46 ajax-->
+              <div class="row p-2">
+                    <div class="col-md-6 py-1 pl-4">
+                      <b>Quantity : </b>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control pqty" value="<?= $row['product_qty'] ?>">
+                    </div>
+              </div>
               <input type="hidden" class="pid" value="<?= $row['id'] ?>">
               <input type="hidden" class="pname" value="<?= $row['product_name'] ?>">
               <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
@@ -54,15 +62,17 @@
       var pprice = $form.find(".pprice").val();
       var pimage = $form.find(".pimage").val();
       var pcode = $form.find(".pcode").val();
+      var pqty = $form.find(".pqty").val();
 
       $.ajax({
         url: 'action.php',
         method: 'post',
-        data: {pid:pid, pname:pname, pprice:pprice, pimage:pimage, pcode:pcode},
+        data: {pid:pid, pname:pname, pprice:pprice, pqty: pqty, pimage:pimage, pcode:pcode},
         success:function(response){
           console.log("id:" + pid);
           console.log("name:" + pname);
           console.log("price:" + pprice);
+          console.log("pqty:" + pqty);
           console.log("image:" + pimage);
           console.log("code:" + pcode);
           console.log(response);
@@ -93,7 +103,6 @@
         crossorigin="anonymous">
 </script>
 
-</body>
-</html>
-
-<script src="js/app.js"></script>
+<?php
+    include_once 'footer.php'
+?>
