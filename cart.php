@@ -40,7 +40,7 @@
                 <a class="nav-link" href="#">Categories</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Checkout</a>
+                <a class="nav-link" href="checkout.php">Checkout</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link active" href="cart.php"><i class="fas fa-shopping-cart"></i>
@@ -48,7 +48,7 @@
                 </li>
             <?php
                 if (isset($_SESSION["userId"])) {
-                echo "<li class='nav-item'><a class='nav-link' aria-current='page' href='profile.php'>Profile</a></li>";
+                //echo "<li class='nav-item'><a class='nav-link' aria-current='page' href='profile.php'>Profile</a></li>";
                 echo "<li class='nav-item'><a class='nav-link' aria-current='page' href='includes/logout.inc.php'>Log out</a></li>";
                 } else {
                 echo "<li class='nav-item'><a class='nav-link' aria-current='page' href='signup.php'>Sign up</a></li>";
@@ -119,12 +119,12 @@
                                 <td><img src="<?= $row['product_image'] ?>" width="50"></td>
                                 <td><?= $row['product_name'] ?></td>
 
-                                <td><i class="fas fa-dollar-sign">&nbsp;&nbsp;<?= number_format($row['product_price'], 2)?></i></td>
+                                <td><i class="fas fa-dollar-sign">&nbsp;<?= number_format($row['product_price'], 2)?></i></td>
                                 <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
                                 <!--Updation itemQty-->
 
                                 <td><input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:75px;"></td>
-                                <td><i class="fas fa-dollar-sign">&nbsp;&nbsp;<?= number_format($row['total_price'], 2)?></td>
+                                <td><i class="fas fa-dollar-sign">&nbsp;<?= number_format($row['total_price'], 2)?></td>
                                 <td>
                                     <a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead" 
                                     onclick="return confirm('Are you sure want to remove this item?');"><i class="fas fa-trash-alt"></i></a>
@@ -142,10 +142,10 @@
                                     <b>Grand Total</b>
                                 </td>
                                 <td>
-                                    <i class="fas fa-dollar-sign">&nbsp;&nbsp;<?= number_format($grand_total, 2); ?>
+                                    <i class="fas fa-dollar-sign">&nbsp;<?= number_format($grand_total, 2); ?>
                                 </td>
                                 <td>
-                                    <a href="check.php" class="btn btn-info <?= ($grand_total > 1)? "":"disabled"; ?>">
+                                    <a href="checkout.php" class="btn btn-info <?= ($grand_total > 1)? "":"disabled"; ?>">
                                         <i class="far fa-credit-card"></i>
                                         &nbsp;&nbsp;Checkout
                                     </a>
@@ -200,12 +200,12 @@
             }
         });
     </script>
-
+    <!--
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" 
             crossorigin="anonymous">
     </script>
-
+    -->
 </body>
 </html>
 

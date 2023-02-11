@@ -40,7 +40,7 @@
           <a class="nav-link" href="#">Categories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Checkout</a>
+          <a class="nav-link" href="Checkout.php">Checkout</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart"></i>
@@ -48,7 +48,7 @@
         </li>
       <?php
         if (isset($_SESSION["userId"])) {
-          echo "<li class='nav-item'><a class='nav-link active' aria-current='page' href='profile.php'>Profile</a></li>";
+          /*echo "<li class='nav-item'><a class='nav-link active' aria-current='page' href='profile.php'>Profile</a></li>";*/
           echo "<li class='nav-item'><a class='nav-link active' aria-current='page' href='includes/logout.inc.php'>Log out</a></li>";
         } else {
           echo "<li class='nav-item'><a class='nav-link active' aria-current='page' href='signup.php'>Sign up</a></li>";
