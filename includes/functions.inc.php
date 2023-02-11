@@ -86,7 +86,7 @@
 
         mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $usersname, $hashedPwd);
         mysqli_stmt_execute($stmt);
-        header("location: ../signup.php?error=none");
+        header("location: ../login.php?error=none");
         
         exit();
     }
